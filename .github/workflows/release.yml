@@ -34,7 +34,7 @@ jobs:
           -PRELEASE_STORE_PASSWORD="$RELEASE_STORE_PASSWORD"
           -PRELEASE_KEY_ALIAS="$RELEASE_KEY_ALIAS"
           -PRELEASE_KEY_PASSWORD="$RELEASE_KEY_PASSWORD"
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: android-starter-release
           path: app/build/outputs/bundle/release/*.aab
