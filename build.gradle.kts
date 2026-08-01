@@ -44,7 +44,9 @@ kover {
             excludes {
                 annotatedBy("androidx.compose.runtime.Composable")
                 annotatedBy("dagger.Module")
+                annotatedBy("dagger.internal.DaggerGenerated")
                 classes(
+                    "hilt_aggregated_deps.*",
                     "*.di.*",
                     "*Application",
                     "*Activity",
