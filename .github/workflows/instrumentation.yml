@@ -22,7 +22,7 @@ jobs:
         with:
           distribution: zulu
           java-version: 17
-      - uses: gradle/actions/setup-gradle@v5
+      - uses: gradle/actions/setup-gradle@v6
       - name: Run connected checks
         uses: reactivecircus/android-emulator-runner@v2
         with:

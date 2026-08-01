@@ -24,7 +24,7 @@ jobs:
         with:
           distribution: zulu
           java-version: 17
-      - uses: gradle/actions/setup-gradle@v5
+      - uses: gradle/actions/setup-gradle@v6
       - name: Unit tests, quality, coverage, and debug build
         run: ./scripts/verify.sh
       - name: Upload reports
@@ -63,7 +63,7 @@ jobs:
         with:
           distribution: zulu
           java-version: 17
-      - uses: gradle/actions/setup-gradle@v5
+      - uses: gradle/actions/setup-gradle@v6
       - name: Initialize a product project
         run: ${{ matrix.initialize }}
       - name: Build and test generated project
