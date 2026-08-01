@@ -83,8 +83,6 @@ files. See [CI/CD](docs/CICD.md) for the release secret names.
 - [Architecture and module rules](docs/ARCHITECTURE.md)
 - [Testing strategy](docs/TESTING.md)
 - [CI/CD across Ubuntu, macOS, and Windows](docs/CICD.md)
-- [Medium-ready architecture article](docs/MEDIUM_ARTICLE.md)
 - [Publish this project as a GitHub template](docs/GITHUB_TEMPLATE_PUBLISHING.md)
-- [LinkedIn and X launch posts](docs/SOCIAL_POSTS.md)
 - [Contribution workflow](CONTRIBUTING.md)
 - [Security policy](SECURITY.md)
