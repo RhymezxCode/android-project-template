@@ -1,0 +1,29 @@
+# Gradle and build outputs
+.gradle/
+**/build/
+build/
+
+# Local Android configuration and credentials
+local.properties
+*.jks
+*.keystore
+*.p12
+secrets.properties
+google-services.json
+
+# IDE and operating-system files
+.idea/
+*.iml
+.DS_Store
+Thumbs.db
+
+# Native, test, and profiling outputs
+.cxx/
+.externalNativeBuild/
+captures/
+*.hprof
+
+# Environment files
+.env
+.env.*
+!.env.example

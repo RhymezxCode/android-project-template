@@ -1,0 +1,70 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Verify template baseline
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
+        with:
+          distribution: zulu
+          java-version: 17
+      - uses: gradle/actions/setup-gradle@v5
+      - name: Unit tests, quality, coverage, and debug build
+        run: ./scripts/verify.sh
+      - name: Upload reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: verification-reports
+          path: |
+            **/build/reports/
+            build/reports/kover/
+          if-no-files-found: ignore
+
+  generated-project:
+    name: Generate on ${{ matrix.name }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Ubuntu
+            os: ubuntu-latest
+            initialize: ./scripts/init-project.sh "CI Demo" com.example.cidemo
+            gradle: ./gradlew
+          - name: macOS
+            os: macos-14
+            initialize: ./scripts/init-project.sh "CI Demo" com.example.cidemo
+            gradle: ./gradlew
+          - name: Windows
+            os: windows-latest
+            initialize: .\scripts\init-project.ps1 -ProjectName "CI Demo" -PackageName com.example.cidemo
+            gradle: .\gradlew.bat
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
+        with:
+          distribution: zulu
+          java-version: 17
+      - uses: gradle/actions/setup-gradle@v5
+      - name: Initialize a product project
+        run: ${{ matrix.initialize }}
+      - name: Build and test generated project
+        run: ${{ matrix.gradle }} projects test assembleDebug
