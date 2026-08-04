@@ -24,7 +24,7 @@ cd "${project_dir}"
 class_prefix="$(printf '%s' "${project_name}" | tr -cd '[:alnum:]')"
 old_package="com.example.modularapp"
 old_path="com/example/modularapp"
-new_path="${package_name//./\/}"
+new_path="$(printf '%s' "$package_name" | tr '.' '/')"
 
 while IFS= read -r -d '' file; do
   perl -pi -e \
